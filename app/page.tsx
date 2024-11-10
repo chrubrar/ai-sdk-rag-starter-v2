@@ -26,7 +26,6 @@ export default function Chat() {
          onChange={handleInputChange} 
          placeholder='Say Something...'  
          />
-        <button type="submit">Send</button>
       </form>
     </div>
 
