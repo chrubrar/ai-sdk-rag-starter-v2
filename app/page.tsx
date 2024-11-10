@@ -21,7 +21,7 @@ export default function Chat() {
       </div>
       <form onSubmit={handleSubmit}>
         <input
-          className="fixed bottom-10 right-0 w-96 p-2 rounded-md border border-gray-300"
+          className="fixed bottom-10 right-0 w-96 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
            value={input} 
          onChange={handleInputChange} 
          placeholder='Say Something...'  
