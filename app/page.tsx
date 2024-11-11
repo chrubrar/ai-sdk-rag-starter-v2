@@ -22,8 +22,8 @@ export default function Chat() {
             {m.content.length > 0 ? (
               m.content
             ) : (
-              <span className="italic font-light font-Roboto">
-                { 'calling tool: ' + m?.toolInvocations?.[0].toolName}
+              <span className="italic font-light">
+                {'Calling tool: ' + m?.toolInvocations?.[0]?.toolName}
               </span>
             )}
 
