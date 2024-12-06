@@ -10,14 +10,15 @@ export default function Chat() {
     }
   );
   return (
-    <div className='flex flex-col w-full max-w-md py-24 mx-auto-stretch'>
-      <div className ="space-y-4 flex-1 px-8"> 
+    <div className="flex justify-center items-center h-screen bg-gray">
+      <div className ="bg-white rounded-lg shadow p-4 mb-4 max-w-md w-full"> 
         {messages.map(m=> (
-          <div key={m.id} className="chat-message whitespace-pre-wrap">
+          <div key={m.id} className="flex flex-col h-96 overflow-y-auto">
             <div>
               <div className="font-bold font-Roboto">
                 {m.role}
               </div>
+              
             <p className=" font-Roboto">
             {m.content.length > 0 ? (
               m.content
@@ -29,6 +30,7 @@ export default function Chat() {
 
 
             </p>
+            
            </div>
           </div>
           
