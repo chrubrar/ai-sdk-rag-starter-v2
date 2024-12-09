@@ -23,24 +23,32 @@ export async function GET(request: NextRequest) {
     }
 
     // Add pagination and ordering
-    const [data, countResult] = await Promise.all([
-      query
-        .orderBy(desc(resources.createdAt))
-        .limit(limit)
-        .offset(offset),
-      db
-        .select({ count: sql<number>`count(*)` })
-        .from(resources)
-        .where(search ? like(resources.content, `%${search}%`) : undefined),
+    const paginatedQuery = query
+      .orderBy(desc(resources.createdAt))
+      .limit(limit)
+      .offset(offset);
+
+    const countQuery = db
+      .select({ count: sql<number>`cast(count(*) as integer)` })
+      .from(resources)
+      .$dynamic();
+
+    if (search) {
+      countQuery.where(like(resources.content, `%${search}%`));
+    }
+
+    const [data, [{ count }]] = await Promise.all([
+      paginatedQuery,
+      countQuery,
     ]);
 
     return NextResponse.json({
       data,
       pagination: {
-        total: countResult[0].count,
+        total: count,
         page,
         limit,
-        totalPages: Math.ceil(countResult[0].count / limit),
+        totalPages: Math.ceil(count / limit),
       },
     });
   } catch (error) {
