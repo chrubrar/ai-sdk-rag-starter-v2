@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const offset = (page - 1) * limit;
 
     // Base query
-    let query = db.select().from(resources);
+    let query = db.select().from(resources).$dynamic();
 
     // Add search condition if search parameter exists
     if (search) {
